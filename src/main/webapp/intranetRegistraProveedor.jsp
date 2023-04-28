@@ -15,13 +15,13 @@
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
 <link rel="stylesheet" href="css/bootstrapValidator.css"/>
 
-<title>Sistemas - Jorge Jacinto Gutarra</title>
+<title>Registra Proveedor</title>
 </head>
 <body>
 
 <jsp:include page="intranetCabecera.jsp" />
 <div class="container" style="margin-top: 4%">
-<h4>Registra Proveedor</h4>
+
 
 	
 </div>

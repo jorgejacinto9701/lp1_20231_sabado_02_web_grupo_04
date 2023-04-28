@@ -6,6 +6,7 @@ import dao.DevolucionDAO;
 import dao.EditorialDAO;
 import dao.GradoDAO;
 import dao.LibroDAO;
+import dao.PaisDAO;
 import dao.PrestamoDAO;
 import dao.ProveedorDAO;
 import dao.RevistaDAO;
@@ -19,6 +20,7 @@ import dao.impl.MySqlDevolucionDAO;
 import dao.impl.MySqlEditorialDAO;
 import dao.impl.MySqlGradoDAO;
 import dao.impl.MySqlLibroDAO;
+import dao.impl.MySqlPaisDAO;
 import dao.impl.MySqlPrestamoDAO;
 import dao.impl.MySqlProveedorDAO;
 import dao.impl.MySqlRevistaDAO;
@@ -51,6 +53,10 @@ public class FabricaMysql extends Fabrica {
 	public AutorDAO getAutor() {	
 		
 		return new MySqlAutorDAO(); 	
+	}
+	@Override
+	public PaisDAO getPaisDAO() {
+		return new MySqlPaisDAO();
 	}
 	
 

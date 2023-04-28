@@ -6,6 +6,7 @@ import dao.DevolucionDAO;
 import dao.EditorialDAO;
 import dao.GradoDAO;
 import dao.LibroDAO;
+import dao.PaisDAO;
 import dao.PrestamoDAO;
 import dao.ProveedorDAO;
 import dao.RevistaDAO;
@@ -31,6 +32,7 @@ public abstract class Fabrica {
 	public abstract TesisDAO getTesisDAO();
 	public abstract DevolucionDAO getDevolucionDAO();
 	public abstract PrestamoDAO getPrestamoDAO();
+	public abstract PaisDAO getPaisDAO();
 	public abstract SeparacionDAO getSeparacionDAO();
 	public abstract GradoDAO getGrado();
 	
