@@ -23,7 +23,7 @@ public class MySqlGradoDAO implements GradoDAO{
 		try {
 			conn = MySqlDBConexion.getConexion();
 			
-			String sql = "select * from grado";
+			String sql = "select * from grado_autor";
 			pstm = conn.prepareStatement(sql);
 			log.info(">>>> " + pstm);
 
