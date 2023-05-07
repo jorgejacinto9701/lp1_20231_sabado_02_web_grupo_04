@@ -19,4 +19,19 @@ function mostrarMensaje(msg, ejecutarAccion){
 	
 	$('#id_my_modal').modal("show");
 }
-
+  
+var IDIOMA = {
+	processing:"procesando...",
+    lengthMenu: "_MENU_ Registros por p&aacute;gina",
+    zeroRecords: "No existen registros",
+    info: "P&aacute;gina _PAGE_ de _PAGES_",
+    infoEmpty: "Sin registros",
+    infoFiltered: "(Filtro de _MAX_ registros)",
+    search: "Buscar:",
+    paginate: {
+        "first":      "Primero",
+        "last":       "Last",
+        "next":       "Siguiente",
+        "previous":   "Anterior"
+    }
+};
