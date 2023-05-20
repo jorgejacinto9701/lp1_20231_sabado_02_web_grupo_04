@@ -58,23 +58,23 @@
 </div>
 
 
-<script type="text/javascript">
-$("#success-alert").fadeTo(1000, 500).slideUp(500, function(){
-    $("#success-alert").slideUp(500);
-});
-</script>
+		<script type="text/javascript">
+		$("#success-alert").fadeTo(1000, 500).slideUp(500, function(){
+		    $("#success-alert").slideUp(500);
+		});
+		</script>
 
 
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#id_form').bootstrapValidator({
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        
+		<script type="text/javascript">
+		$(document).ready(function() {
+		    $('#id_form').bootstrapValidator({
+		        message: 'This value is not valid',
+		        feedbackIcons: {
+		            valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+		        },
+		        
         fields:{
         	nombre : {  
         		selector: "#id_nombre",

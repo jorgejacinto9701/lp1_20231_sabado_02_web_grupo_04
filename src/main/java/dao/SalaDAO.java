@@ -1,7 +1,10 @@
 package dao;
 
-public interface SalaDAO {
+import entity.Sala;
 
+public interface SalaDAO {
 	
+	public abstract int insertaSala(Sala obj);
+
 }
 
