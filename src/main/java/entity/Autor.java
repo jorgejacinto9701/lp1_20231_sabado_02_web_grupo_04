@@ -19,6 +19,7 @@ public class Autor {
 	private Timestamp fechaRegistro;
 	private int estado;
 	private Grado grado;
+	private String formateadoFecNac;
 	
 
    

@@ -62,7 +62,7 @@ public class MySqlAutorDAO implements AutorDAO {
 			conn = MySqlDBConexion.getConexion();
 			
 			String sql = "SELECT a.*, g.descripcion FROM autor a "
-					+ "inner join grado g on a.idGrado = g.idGrado "
+					+ "inner join grado_autor g on a.idGrado = g.idGrado "
 					+ "where fechaNacimiento between ? and ? ";
 			pstm = conn.prepareStatement(sql);
 			pstm.setDate(1, fecInicio);
@@ -77,13 +77,15 @@ public class MySqlAutorDAO implements AutorDAO {
 				objAutor = new Autor();
 				objAutor.setIdAutor(rs.getInt(1));
 				objAutor.setNombres(rs.getString(2));
-				objAutor.setFechaNacimiento(rs.getDate(3));
-				objAutor.setEstado(rs.getInt(4));
-				objAutor.setFechaRegistro(rs.getTimestamp(5));
+				objAutor.setApellidos(rs.getString(3));
+				objAutor.setFechaNacimiento(rs.getDate(4));
+				objAutor.setTelefono(rs.getString(5));
+				objAutor.setFechaRegistro(rs.getTimestamp(6));
+				objAutor.setEstado(rs.getInt(7));
 				
 				objGrado = new Grado();
-				objGrado.setIdGrado(rs.getInt(6));
-				objGrado.setDescripcion(rs.getString(7));
+				objGrado.setIdGrado(rs.getInt(8));
+				objGrado.setDescripcion(rs.getString(9));
 				objAutor.setGrado(objGrado);
 				
 				lista.add(objAutor);
@@ -111,7 +113,7 @@ public class MySqlAutorDAO implements AutorDAO {
 			conn = MySqlDBConexion.getConexion();
 			
 			String sql = "SELECT a.*, g.descripcion FROM autor a "
-					+ "inner join grado g on a.idGrado = g.idGrado "
+					+ "inner join grado_autor g on a.idGrado = g.idGrado "
 					+ "where a.nombres like ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, filtro);
@@ -125,14 +127,16 @@ public class MySqlAutorDAO implements AutorDAO {
 				objAutor = new Autor();
 				objAutor.setIdAutor(rs.getInt(1));
 				objAutor.setNombres(rs.getString(2));
-				objAutor.setFechaNacimiento(rs.getDate(3));
-				objAutor.setEstado(rs.getInt(4));
-				objAutor.setFechaRegistro(rs.getTimestamp(5));
-				//objAutor.setFormateadoFecNac(FechaUtil.getFechaFormateadaYYYYMMdd(rs.getDate(3)));
+				objAutor.setApellidos(rs.getString(3));
+				objAutor.setFechaNacimiento(rs.getDate(4));
+				objAutor.setTelefono(rs.getString(5));
+				objAutor.setFechaRegistro(rs.getTimestamp(6));
+				objAutor.setEstado(rs.getInt(7));
+				objAutor.setFormateadoFecNac(FechaUtil.getFechaFormateadaYYYYMMdd(rs.getDate(4)));
 				
 				objGrado = new Grado();
-				objGrado.setIdGrado(rs.getInt(6));
-				objGrado.setDescripcion(rs.getString(7));
+				objGrado.setIdGrado(rs.getInt(8));
+				objGrado.setDescripcion(rs.getString(9));
 				objAutor.setGrado(objGrado);
 				
 				lista.add(objAutor);
@@ -216,7 +220,7 @@ public class MySqlAutorDAO implements AutorDAO {
 			conn = MySqlDBConexion.getConexion();
 			
 			String sql = "SELECT a.*, g.descripcion FROM autor a "
-					+ "inner join grado g on a.idGrado = g.idGrado "
+					+ "inner join grado_autor g on a.idGrado = g.idGrado "
 					+ "where a.idAutor = ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, idAutor);

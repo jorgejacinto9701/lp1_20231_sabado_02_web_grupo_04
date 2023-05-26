@@ -17,17 +17,17 @@
 <link rel="stylesheet" href="css/bootstrapValidator.css"/>
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
 
-<title>Sistemas - Jorge Jacinto Gutarra</title>
+<title>CRUD Autor</title>
 </head>
 <body>
 
 <jsp:include page="intranetCabecera.jsp" />
 <div class="container" style="margin-top: 4%">
-	<h4>Crud Autor</h4>
+	<h4>CRUD Autor</h4>
 	
 	<div class="row" style="margin-top: 5%">
 			<div class="col-md-3">
-				<label class="control-label" for="id_filtro">Nombre</label> 
+				<label class="control-label" for="id_filtro">Nombres</label> 
 			</div>	
 			<div class="col-md-6">
 				<input	class="form-control" type="text" id="id_filtro" placeholder="Ingresar nombre">
@@ -212,7 +212,7 @@
 	<script type="text/javascript">
 		$("#id_btn_filtro").click(function() {
 			var vfiltro = $("#id_filtro").val();
-			$.getJSON("intranetCrudAutor", {"metodo": "lista","filtro":vfiltro}, function(data) {
+			$.getJSON("crudAutor", {"metodo": "lista","filtro":vfiltro}, function(data) {
 				agregarGrilla(data);
 			});
 		});
@@ -239,18 +239,18 @@
 						{data: "apellidos",className:'text-center'},
 						{data: "formateadoFecNac",className:'text-center'},
 						{data: "telefono",className:'text-center'},
-						{data: "grado.descripcion",className:'text-center'},
 						{data: function(row, type, val, meta){
 							return row.estado == 1 ? "Activo" : "Inactivo";  
 						},className:'text-center'},
+						{data: "grado.descripcion",className:'text-center'},
 						{data: function(row, type, val, meta){
 							return '<button type="button" class="btn btn-info btn-sm" onClick="verFormularioActualiza(\'' + row.idAutor + '\',\'' +  row.nombres   + '\',\'' +  row.apellidos   + '\',\'' +  row.formateadoFecNac + '\',\'' +  row.telefono   + '\',\'' +  row.estado + '\',\'' +  row.grado.idGrado +'\');">Editar</button>';  
 						},className:'text-center'},
 						{data: function(row, type, val, meta){
-							return '<button type="button" class="btn btn-warning btn-sm" onClick="eliminacionLogica(\'' + row.idAutor +'\');" >E.Lógica</button>';
+							return '<button type="button" class="btn btn-warning btn-sm" onClick="eliminacionLogica(\'' + row.idAutor +'\');" >Activo</button>';
 						},className:'text-center'},
 						{data: function(row, type, val, meta){
-							return '<button type="button" class="btn btn-danger btn-sm"  onClick="eliminacionFisica(\'' + row.idAutor +'\');" >E.Física</button>';
+							return '<button type="button" class="btn btn-danger btn-sm"  onClick="eliminacionFisica(\'' + row.idAutor +'\');" >Eliminar</button>';
 						},className:'text-center'},
 					]                                     
 			    });
@@ -259,7 +259,7 @@
 		function eliminacionLogica(idAutor){
 			 $.ajax({
 		          type: "POST",
-		          url: "intranetCrudAutor", 
+		          url: "crudAutor", 
 		          data: {"metodo":"eLogica", "idAutor":idAutor},
 		          success: function(data){
 		        	  agregarGrilla(data.datos);
@@ -278,7 +278,7 @@
 		function accionEliminacionFisica(array){
 			 $.ajax({
 		          type: "POST",
-		          url: "intranetCrudAutor", 
+		          url: "crudAutor", 
 		          data: {"metodo": "eFisica", "idAutor":array[0]},
 		          success: function(data){
  		        	  mostrarMensaje(data.mensaje);
@@ -316,7 +316,7 @@
 		    if (validator.isValid()) {
 		        $.ajax({
 			          type: "POST",
-			          url: "intranetCrudAutor", 
+			          url: "crudAutor", 
 			          data: $('#id_form_registra').serialize(),
 			          success: function(data){
 			        	  mostrarMensaje(data.mensaje);
@@ -339,7 +339,7 @@
 		    if (validator.isValid()) {
 		        $.ajax({
 			          type: "POST",
-			          url: "intranetCrudAutor", 
+			          url: "crudAutor", 
 			          data: $('#id_form_actualiza').serialize(),
 			          success: function(data){
 			        	  mostrarMensaje(data.mensaje);
