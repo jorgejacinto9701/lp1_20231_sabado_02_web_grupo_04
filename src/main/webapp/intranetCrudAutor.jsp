@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="css/bootstrapValidator.css"/>
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
 
-<title>CRUD Autor</title>
+<title>Crud Autor</title>
 </head>
 <body>
 
