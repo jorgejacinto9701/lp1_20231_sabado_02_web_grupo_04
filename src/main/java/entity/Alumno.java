@@ -22,5 +22,6 @@ public class Alumno {
 	private Timestamp fechaRegistro;
 	private int estado;
 	private Pais pais;
+	private String formateadoFecNac;
 	
 }
