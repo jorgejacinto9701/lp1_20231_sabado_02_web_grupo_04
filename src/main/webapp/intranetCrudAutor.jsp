@@ -482,7 +482,7 @@
 		                    
 		                    regexp: {
 		                        regexp: /^\d{9}$/,
-		                        message: 'El teléfono solo puede contener números y tener 9 dígitos'
+		                        message: 'El telefono solo puede contener números y tener 9 dígitos'
 		                    },
 		                    
 		                    
