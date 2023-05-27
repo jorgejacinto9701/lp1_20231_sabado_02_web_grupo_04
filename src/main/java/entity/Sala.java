@@ -1,6 +1,9 @@
 package entity;
 
+
+
 import java.sql.Date;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +20,5 @@ public class Sala {
 	private Date fechaRegistro;
 	private int estado;
 	private Sede sede;
-
+	
 }

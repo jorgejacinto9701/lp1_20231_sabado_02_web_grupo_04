@@ -33,7 +33,7 @@
 				<input	class="form-control" type="number" id="id_filtro" placeholder="Ingrese el numero">
 			</div>	
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary" id="id_btn_filtro">Filtra</button>
+				<button type="button" class="btn btn-primary" id="id_btn_filtro">Filtro</button>
 			</div>	
 			<div class="col-md-1">
 				<button type="button" class="btn btn-primary"  data-toggle='modal' data-target="#id_div_modal_registra" >Registra</button>
@@ -80,19 +80,19 @@
 			                                <div class="form-group" >
 		                                        <label class="col-lg-3 control-label" for="id_reg_numero">Numero</label>
 		                                        <div class="col-lg-8">
-													<input class="form-control" id="id_reg_numero" name="numero" placeholder="Ingrese el numero" type="number"/>
+													<input class="form-control" id="id_reg_numero" name="numero" placeholder="Ingrese el numero" type="text"/>
 		                                        </div>
 		                                    </div>
 		                                    <div class="form-group" >
 		                                        <label class="col-lg-3 control-label" for="id_reg_piso">Piso</label>
 		                                        <div class="col-lg-8">
-													<input class="form-control" id="id_reg_piso" name="piso" placeholder="Ingrese el piso" type="number"/>
+													<input class="form-control" id="id_reg_piso" name="piso" placeholder="Ingrese el piso" type="text"/>
 		                                        </div>
 		                                    </div>
 		                                    <div class="form-group" >
 		                                        <label class="col-lg-3 control-label" for="id_reg_numalumnos">Numero de Alumnos</label>
 		                                        <div class="col-lg-8">
-													<input class="form-control" id="id_reg_numalumnos" name="numAlumnos" placeholder="Ingrese el numero de alumnos" type="number"/>
+													<input class="form-control" id="id_reg_numalumnos" name="numAlumnos" placeholder="Ingrese el numero de alumnos" type="text"/>
 		                                        </div>
 		                                    </div>  	 	
 											<div class="form-group">
@@ -208,7 +208,7 @@
 	<script type="text/javascript">
 		$("#id_btn_filtro").click(function() {
 			var vfiltro = $("#id_filtro").val();
-			$.getJSON("intranetCrudSala", {"metodo":"lista","filtro":vfiltro}, function(data) {
+			$.getJSON("crudSala", {"metodo":"lista","filtro":vfiltro}, function(data) {
 				agregarGrilla(data);
 			});
 		});
@@ -252,7 +252,26 @@
 			    });
 		}
 		
-		function verFormularioActualiza(idSala, numero, piso, numalumnos, recursos, estado, sede){
+		function eliminacionLogica(idSala){
+			 $.ajax({
+		          type: "POST",
+		          url: "crudSala", 
+		          data: {"metodo":"eLogica", "idSala":idSala},
+		          success: function(data){
+		        	  agregarGrilla(data.datos);
+		          },
+		          error: function(){
+		        	  mostrarMensaje(MSG_ERROR);
+		          }
+		    });
+		}
+		
+		function eliminacionFisica(idSala){	
+			var array = [idSala];
+			mostrarMensajeConfirmacion(MSG_ELIMINAR, accionEliminacionFisica,null,array);
+		}
+		
+		function verFormularioActualiza(idSala, numero, piso, numAlumnos, recursos, estado, sede){
 			console.log(">> verFormularioActualiza >> " + idSala);
 			$("#id_div_modal_actualiza").modal("show");
 			$("#idSala").val(idSala);
@@ -279,7 +298,7 @@
 		function accionEliminacionFisica(array){
 			 $.ajax({
 		          type: "POST",
-		          url: "intranetCrudSala", 
+		          url: "crudSala", 
 		          data: {"metodo":"eFisica", "idSala":array[0]},
 		          success: function(data){
 		        	  mostrarMensaje(data.mensaje);
@@ -298,7 +317,7 @@
 		    if (validator.isValid()) {
 		        $.ajax({
 			          type: "POST",
-			          url: "intranetCrudSala", 
+			          url: "crudSala", 
 			          data: $('#id_form_registra').serialize(),
 			          success: function(data){
 			        	  mostrarMensaje(data.mensaje);
@@ -320,7 +339,7 @@
 		    if (validator.isValid()) {
 		        $.ajax({
 			          type: "POST",
-			          url: "intranetCrudSala", 
+			          url: "crudSala", 
 			          data: $('#id_form_actualiza').serialize(),
 			          success: function(data){
 			        	  mostrarMensaje(data.mensaje);
@@ -337,7 +356,7 @@
 		function eliminacionLogica(idSala){
 			 $.ajax({
 		          type: "POST",
-		          url: "intranetCrudSala", 
+		          url: "crudSala", 
 		          data: {"metodo":"eLogica", "idSala":idSala},
 		          success: function(data){
 		        	  agregarGrilla(data.datos);
@@ -374,7 +393,7 @@
 		                    },
 		        		}
 		        	},
-		        	numalumnos : {
+		        	numAlumnos : {
 		        		selector: "#id_reg_numalumnos",
 		        		validators : {
 		        			notEmpty: {

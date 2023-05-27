@@ -21,16 +21,15 @@ import entity.Sala;
 import entity.Sede;
 import fabricas.Fabrica;
 
-@WebServlet("/intranetCrudSala")
+@WebServlet("/crudSala")
 public class CrudSalaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
 	private static Logger log = Logger.getLogger(CrudSalaServlet.class.getName());
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		log.info(">> CrudSalaServlet >> service");
+		log.info(">> crudSala >> service");
 		String vmetodo = req.getParameter("metodo");
 		switch (vmetodo) {
 		case "lista":
@@ -52,13 +51,13 @@ public class CrudSalaServlet extends HttpServlet {
 	}
 
 	protected void lista(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		log.info(">> CrudSalaServlet >> lista");
+		log.info(">> crudSala >> lista");
 
 		Fabrica fabrica = Fabrica.getFabrica(Fabrica.MYSQL);
 		SalaDAO dao = fabrica.getSalaDAO();
 
 		String filtro = req.getParameter("filtro");
-		List<Sala> lista = dao.listaSala(filtro + "%");
+		List<Sala> lista = dao.listaSala(filtro+"%");
 
 		Gson gson = new Gson();
 		String json = gson.toJson(lista);
@@ -70,7 +69,7 @@ public class CrudSalaServlet extends HttpServlet {
 	}
 
 	protected void inserta(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { 		
-		log.info(">> CrudSalaServlet >> inserta");
+		log.info(">> crudSala >> inserta");
 		
 		String vnumero = req.getParameter("numero");
 		String vpiso = req.getParameter("piso");
@@ -86,8 +85,8 @@ public class CrudSalaServlet extends HttpServlet {
 		objSala.setPiso(Integer.parseInt(vpiso));
 		objSala.setNumAlumnos(Integer.parseInt(vnumalumnos));
 		objSala.setRecursos(vrecursos);
-		objSala.setSede(objSede);
 		objSala.setEstado(1);
+		objSala.setSede(objSede);
 		objSala.setFechaRegistro(new Date(System.currentTimeMillis()));
 		
 		Fabrica fabrica = Fabrica.getFabrica(Fabrica.MYSQL);
@@ -112,15 +111,15 @@ public class CrudSalaServlet extends HttpServlet {
 	}
 
 	protected void actualiza(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		log.info(">> CrudSalaServlet >> actualiza");
+		log.info(">> crudSala >> actualiza");
 		
 		String vidSala = req.getParameter("idSala");
 		String vnumero = req.getParameter("numero");
 		String vpiso = req.getParameter("piso");
 		String vnumalumnos = req.getParameter("numAlumnos");
 		String vrecursos = req.getParameter("recursos");
-		String vsede = req.getParameter("sede");
 		String vestado = req.getParameter("estado");
+		String vsede = req.getParameter("sede");
 		
 		Sede objSede = new Sede();
 		objSede.setIdSede(Integer.parseInt(vsede));
@@ -132,6 +131,7 @@ public class CrudSalaServlet extends HttpServlet {
 		objSala.setNumAlumnos(Integer.parseInt(vnumalumnos));
 		objSala.setRecursos(vrecursos);
 		objSala.setEstado(Integer.parseInt(vestado));
+		objSala.setFechaRegistro(new Date(System.currentTimeMillis()));
 		objSala.setSede(objSede);
 		
 		Fabrica fabrica = Fabrica.getFabrica(Fabrica.MYSQL);
@@ -157,9 +157,8 @@ public class CrudSalaServlet extends HttpServlet {
 		out.println(json);
 	}
 
-	protected void eliminacionLogica(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		log.info(">> CrudClienteServlet >> eliminacionLogica");
+	protected void eliminacionLogica(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		log.info(">> crudSala >> eliminacionLogica");
 		
 		Fabrica fabrica = Fabrica.getFabrica(Fabrica.MYSQL);
 		SalaDAO dao = fabrica.getSalaDAO();
@@ -186,7 +185,7 @@ public class CrudSalaServlet extends HttpServlet {
 
 	protected void eliminacionFisica(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		log.info(">> CrudClienteServlet >> eliminacionFisica");
+		log.info(">> crudSala >> eliminacionFisica");
 		
 		Fabrica fabrica = Fabrica.getFabrica(Fabrica.MYSQL);
 		SalaDAO dao = fabrica.getSalaDAO();

@@ -2,6 +2,7 @@ package dao.impl;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class MySqlSalaDAO implements SalaDAO {
 		
 		return salida;
 	}
+	
 	@Override
 	public List<Sala> listaSala(String filtro) {
 		List<Sala> lista = new ArrayList<Sala>();
@@ -58,9 +60,9 @@ public class MySqlSalaDAO implements SalaDAO {
 		try {
 			conn = MySqlDBConexion.getConexion();
 			
-			String sql = "select cl.*, ca.nombre from cliente cl inner join categoria ca on "
-					+ " cl.idCategoria = ca.idCategoria "
-					+ " where cl.nombre like ? ";
+			String sql = "select a.*, p.numero from sala a inner join sede p on "
+					+ " p.idSede = a.idSede "
+					+ " where a.nombre like ? ";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, filtro);
 			
@@ -105,7 +107,7 @@ public class MySqlSalaDAO implements SalaDAO {
 		PreparedStatement pstm = null;
 		try {
 			conn = MySqlDBConexion.getConexion();
-			String sql = "update cliente set numero=?, piso=?, numAlumno=?, recursos=?, estado=?, idSede=? where idSala=?";
+			String sql = "update sala set numero=?, piso=?, numAlumnos=?, recursos=?, estado=?, idSede=? where idSala=?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, obj.getNumero());
 			pstm.setInt(2, obj.getPiso());
@@ -136,7 +138,7 @@ public class MySqlSalaDAO implements SalaDAO {
 		PreparedStatement pstm = null;
 		try {
 			conn = MySqlDBConexion.getConexion();
-			String sql = "delete from cliente where idSala = ?";
+			String sql = "delete from sala where idSala = ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, idSala);
 			
@@ -163,9 +165,9 @@ public class MySqlSalaDAO implements SalaDAO {
 		try {
 			conn = MySqlDBConexion.getConexion();
 			
-			String sql = "SELECT e.*, p.nombre FROM sala e "
-					+ "inner join pais p on e.idSede = p.idSede "
-					+ "where e.idSede = ?";
+			String sql = "select a.*, p.numero from sala a inner join sede p on "
+					+ " a.idSede = p.idSede "
+					+ " where a.idSala like ? ";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, idSala);
 			
