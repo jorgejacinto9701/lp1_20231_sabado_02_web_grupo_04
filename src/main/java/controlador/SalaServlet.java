@@ -1,9 +1,8 @@
 package controlador;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +40,7 @@ public class SalaServlet extends HttpServlet {
 			objSala.setPiso(Integer.parseInt(vpiso));
 			objSala.setNumAlumnos(Integer.parseInt(vnumAlumnos));
 			objSala.setRecursos(vrecursos);
-			objSala.setFechaRegistro(new Date(System.currentTimeMillis()));
+			objSala.setFechaRegistro(new Timestamp(System.currentTimeMillis()));
 			objSala.setEstado(1);
 			objSala.setSede(objSede);
 		

@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="css/bootstrap.css"/>
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
 <link rel="stylesheet" href="css/bootstrapValidator.css"/>
-<link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
 
 <title>Sistemas - Jorge Jacinto Gutarra</title>
 </head>
@@ -24,19 +23,20 @@
 <jsp:include page="intranetCabecera.jsp" />
 <div class="container" style="margin-top: 4%">
 <h4>Crud Sala</h4>
+<h5>Autor: Sebastian Torres Mori</h5>
 	
 	<div class="row" style="margin-top: 5%">
 			<div class="col-md-3">
-				<label class="control-label" for="id_filtro">Numero</label> 
+				<label class="control-label" for="id_filtro">Numero de sala</label> 
 			</div>	
 			<div class="col-md-6">
-				<input	class="form-control" type="number" id="id_filtro" placeholder="Ingrese el numero">
+				<input	class="form-control" type="text" id="id_filtro" placeholder="Ingrese el numero de sala">
 			</div>	
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary" id="id_btn_filtro">Filtro</button>
+				<button type="button" class="btn btn-primary" id="id_btn_filtro">Filtrar</button>
 			</div>	
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary"  data-toggle='modal' data-target="#id_div_modal_registra" >Registra</button>
+				<button type="button" class="btn btn-primary"  data-toggle='modal' data-target="#id_div_modal_registra" >Registrar</button>
 			</div>	
 		</div>
 		
@@ -45,9 +45,10 @@
 				<thead style='background-color:#337ab7; color:white'>
 					<tr>
 						<th>Código</th>
-						<th>Numero</th>
+						<th>Numero de Sala</th>
 						<th>Piso</th>
 						<th>Num. Alumnos</th>
+						<th>Recursos</th>
 						<th>Estado</th>
 						<th>Sede</th>
 						<th></th>
@@ -78,7 +79,7 @@
 			                   			<input type="hidden" name="metodo" value="inserta">
 			                   			<div class="panel-body">
 			                                <div class="form-group" >
-		                                        <label class="col-lg-3 control-label" for="id_reg_numero">Numero</label>
+		                                        <label class="col-lg-3 control-label" for="id_reg_numero">Numero de sala</label>
 		                                        <div class="col-lg-8">
 													<input class="form-control" id="id_reg_numero" name="numero" placeholder="Ingrese el numero" type="text"/>
 		                                        </div>
@@ -143,15 +144,15 @@
 			                   			<input type="hidden" name="idSala" id="idSala">
 			                   			<div class="panel-body">
 			                                <div class="form-group" >
-		                                        <label class="col-lg-3 control-label" for="id_act_numero">Numero</label>
+		                                        <label class="col-lg-3 control-label" for="id_act_numero">Numero de sala</label>
 		                                        <div class="col-lg-8">
-													<input class="form-control" id="id_act_numero" name="numero" placeholder="Ingrese el Numero" type="number">
+													<input class="form-control" id="id_act_numero" name="numero" placeholder="Ingrese el Numero" type="text">
 		                                        </div>
 		                                    </div> 	
 											<div class="form-group" >
 		                                        <label class="col-lg-3 control-label" for="id_act_piso">Piso</label>
 		                                        <div class="col-lg-8">
-													<input class="form-control" id="id_act_piso" name="piso" placeholder="Ingrese el piso" type="number">
+													<input class="form-control" id="id_act_piso" name="piso" placeholder="Ingrese el piso" type="text">
 		                                        </div>
 		                                    </div>
 		                                    <div class="form-group" >
@@ -252,37 +253,18 @@
 			    });
 		}
 		
-		function eliminacionLogica(idSala){
-			 $.ajax({
-		          type: "POST",
-		          url: "crudSala", 
-		          data: {"metodo":"eLogica", "idSala":idSala},
-		          success: function(data){
-		        	  agregarGrilla(data.datos);
-		          },
-		          error: function(){
-		        	  mostrarMensaje(MSG_ERROR);
-		          }
-		    });
-		}
-		
-		function eliminacionFisica(idSala){	
-			var array = [idSala];
-			mostrarMensajeConfirmacion(MSG_ELIMINAR, accionEliminacionFisica,null,array);
-		}
-		
 		function verFormularioActualiza(idSala, numero, piso, numAlumnos, recursos, estado, sede){
 			console.log(">> verFormularioActualiza >> " + idSala);
 			$("#id_div_modal_actualiza").modal("show");
 			$("#idSala").val(idSala);
 			$("#id_act_numero").val(numero);
 			$("#id_act_piso").val(piso);
-			$("#id_act_numalumnos").val(numalumnos);
+			$("#id_act_numalumnos").val(numAlumnos);
 			$("#id_act_recursos").val(recursos);
 			$("#id_act_estado").val(estado);
 			$("#id_act_sede").val(sede);
 		}
-		
+	
 		$.getJSON("cargaSede",{}, function (data){
 			$.each(data, function(index, item){
 				$("#id_reg_sede").append("<option value='"+ item.idSede +"'>"+ item.nombre+"</option>");
@@ -353,6 +335,7 @@
 			    });
 		    }
 		});
+		
 		function eliminacionLogica(idSala){
 			 $.ajax({
 		          type: "POST",
@@ -366,6 +349,7 @@
 		          }
 		    });
 		}
+		
 		
 		$(document).ready(function() {
 		    $('#id_form_registra').bootstrapValidator({
@@ -452,7 +436,7 @@
 		                    },
 		        		}
 		        	},
-		        	numalumnos : {
+		        	numAlumnos : {
 		        		selector: "#id_act_numalumnos",
 		        		validators : {
 		        			notEmpty: {
@@ -494,13 +478,17 @@
 		});		
 		
 		function limpiarFormulario(){	
-			$('#id_reg_nombre').val("");
-			$('#id_reg_dni').val("");
-			$('#id_reg_categoria').val(" ");
-			$('#id_act_nombre').val("");
-			$('#id_act_dni').val("");
-			$('#id_act_categoria').val(" ");
+			$('#id_reg_numero').val("");
+			$('#id_reg_piso').val("");
+			$('#id_reg_numalumnos').val(" ");
+			$('#id_reg_recursos').val(" ");
+			$('#id_reg_sede').val(" ");
+			$('#id_act_numero').val("");
+			$('#id_act_piso').val("");
+			$('#id_act_numalumnos').val(" ");
+			$('#id_act_recursos').val(" ");
 			$('#id_act_estado').val(" ");
+			$('#id_act_sede').val(" ");
 		}
 	</script>
 	

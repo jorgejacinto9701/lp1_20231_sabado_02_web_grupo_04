@@ -1,8 +1,6 @@
 package dao.impl;
 
 import java.sql.Connection;
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -32,7 +30,7 @@ public class MySqlSalaDAO implements SalaDAO {
 			pstm.setInt(2, obj.getPiso());
 			pstm.setInt(3, obj.getNumAlumnos());
 			pstm.setString(4, obj.getRecursos());
-			pstm.setDate(5, obj.getFechaRegistro());
+			pstm.setTimestamp(5, obj.getFechaRegistro());
 			pstm.setInt(6, obj.getEstado());
 			pstm.setInt(7, obj.getSede().getIdSede());
 			
@@ -60,9 +58,9 @@ public class MySqlSalaDAO implements SalaDAO {
 		try {
 			conn = MySqlDBConexion.getConexion();
 			
-			String sql = "select a.*, p.numero from sala a inner join sede p on "
-					+ " p.idSede = a.idSede "
-					+ " where a.nombre like ? ";
+			String sql = "SELECT sa.*, se.nombre FROM sala sa "
+					+ "inner join sede se on sa.idSede = se.idSede "
+					+ "where sa.numero like ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, filtro);
 			
@@ -78,7 +76,7 @@ public class MySqlSalaDAO implements SalaDAO {
 				objSala.setPiso(rs.getInt(3));
 				objSala.setNumAlumnos(rs.getInt(4));
 				objSala.setRecursos(rs.getString(5));
-				objSala.setFechaRegistro(rs.getDate(6));
+				objSala.setFechaRegistro(rs.getTimestamp(6));
 				objSala.setEstado(rs.getInt(7));
 				
 				objSede = new Sede();
@@ -165,9 +163,9 @@ public class MySqlSalaDAO implements SalaDAO {
 		try {
 			conn = MySqlDBConexion.getConexion();
 			
-			String sql = "select a.*, p.numero from sala a inner join sede p on "
-					+ " a.idSede = p.idSede "
-					+ " where a.idSala like ? ";
+			String sql = "SELECT sa.*, se.nombre FROM sala sa "
+					+ "inner join sede se on sa.idSede = se.idSede "
+					+ "where sa.idSala like ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, idSala);
 			
@@ -182,7 +180,7 @@ public class MySqlSalaDAO implements SalaDAO {
 				objSala.setPiso(rs.getInt(3));
 				objSala.setNumAlumnos(rs.getInt(4));
 				objSala.setRecursos(rs.getString(5));
-				objSala.setFechaRegistro(rs.getDate(6));
+				objSala.setFechaRegistro(rs.getTimestamp(6));
 				objSala.setEstado(rs.getInt(7));
 				
 				objSede = new Sede();

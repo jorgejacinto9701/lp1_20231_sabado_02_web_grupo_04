@@ -1,9 +1,8 @@
 package controlador;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -57,7 +56,7 @@ public class CrudSalaServlet extends HttpServlet {
 		SalaDAO dao = fabrica.getSalaDAO();
 
 		String filtro = req.getParameter("filtro");
-		List<Sala> lista = dao.listaSala(filtro+"%");
+		List<Sala> lista = dao.listaSala(filtro + "%");
 
 		Gson gson = new Gson();
 		String json = gson.toJson(lista);
@@ -73,7 +72,7 @@ public class CrudSalaServlet extends HttpServlet {
 		
 		String vnumero = req.getParameter("numero");
 		String vpiso = req.getParameter("piso");
-		String vnumalumnos = req.getParameter("numAlumnos");
+		String vnumAlumnos = req.getParameter("numAlumnos");
 		String vrecursos = req.getParameter("recursos");
 		String vsede = req.getParameter("sede");
 
@@ -83,11 +82,11 @@ public class CrudSalaServlet extends HttpServlet {
 		Sala objSala = new Sala();
 		objSala.setNumero(vnumero);
 		objSala.setPiso(Integer.parseInt(vpiso));
-		objSala.setNumAlumnos(Integer.parseInt(vnumalumnos));
+		objSala.setNumAlumnos(Integer.parseInt(vnumAlumnos));
 		objSala.setRecursos(vrecursos);
-		objSala.setEstado(1);
 		objSala.setSede(objSede);
-		objSala.setFechaRegistro(new Date(System.currentTimeMillis()));
+		objSala.setEstado(1);
+		objSala.setFechaRegistro(new Timestamp(System.currentTimeMillis()));
 		
 		Fabrica fabrica = Fabrica.getFabrica(Fabrica.MYSQL);
 		SalaDAO dao = fabrica.getSalaDAO();
@@ -116,9 +115,8 @@ public class CrudSalaServlet extends HttpServlet {
 		String vidSala = req.getParameter("idSala");
 		String vnumero = req.getParameter("numero");
 		String vpiso = req.getParameter("piso");
-		String vnumalumnos = req.getParameter("numAlumnos");
+		String vnumAlumnos = req.getParameter("numAlumnos");
 		String vrecursos = req.getParameter("recursos");
-		String vestado = req.getParameter("estado");
 		String vsede = req.getParameter("sede");
 		
 		Sede objSede = new Sede();
@@ -128,20 +126,19 @@ public class CrudSalaServlet extends HttpServlet {
 		objSala.setIdSala(Integer.parseInt(vidSala));
 		objSala.setNumero(vnumero);
 		objSala.setPiso(Integer.parseInt(vpiso));
-		objSala.setNumAlumnos(Integer.parseInt(vnumalumnos));
+		objSala.setNumAlumnos(Integer.parseInt(vnumAlumnos));
 		objSala.setRecursos(vrecursos);
-		objSala.setEstado(Integer.parseInt(vestado));
-		objSala.setFechaRegistro(new Date(System.currentTimeMillis()));
 		objSala.setSede(objSede);
+		objSala.setEstado(1);
 		
 		Fabrica fabrica = Fabrica.getFabrica(Fabrica.MYSQL);
 		SalaDAO dao = fabrica.getSalaDAO();
 	
-		int insertados = dao.actualizaSala(objSala);
+		int actualizados = dao.actualizaSala(objSala);
 		List<Sala> lista = dao.listaSala("%");
 		
 		Respuesta objRespuesta = new Respuesta();
-		if (insertados > 0) {
+		if (actualizados > 0) {
 			objRespuesta.setMensaje("Actualización exitosa");
 		}else {
 			objRespuesta.setMensaje("Error al actualizar");
@@ -183,8 +180,7 @@ public class CrudSalaServlet extends HttpServlet {
 		
 	}
 
-	protected void eliminacionFisica(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void eliminacionFisica(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		log.info(">> crudSala >> eliminacionFisica");
 		
 		Fabrica fabrica = Fabrica.getFabrica(Fabrica.MYSQL);
