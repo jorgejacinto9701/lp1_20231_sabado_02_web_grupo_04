@@ -1,9 +1,8 @@
 package controlador;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,43 +25,43 @@ public class SalaServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+				
+			String vnumero= req.getParameter("numero");
+			String vpiso = req.getParameter("piso");
+			String vnumAlumnos = req.getParameter("numAlumnos");
+			String vrecursos = req.getParameter("recursos");
+			String vsede = req.getParameter("sede");
 			
-		String vnumero= req.getParameter("numero");
-		String vpiso = req.getParameter("piso");
-		String vnumAlumnos = req.getParameter("numAlumnos");
-		String vrecursos = req.getParameter("recursos");
-		String vsede = req.getParameter("sede");
+			Sede objSede = new Sede();
+			objSede.setIdSede(Integer.parseInt(vsede));
+			
+			Sala objSala = new Sala();
+			objSala.setNumero(vnumero);
+			objSala.setPiso(Integer.parseInt(vpiso));
+			objSala.setNumAlumnos(Integer.parseInt(vnumAlumnos));
+			objSala.setRecursos(vrecursos);
+			objSala.setFechaRegistro(new Timestamp(System.currentTimeMillis()));
+			objSala.setEstado(1);
+			objSala.setSede(objSede);
 		
-		Sede objSede = new Sede();
-		objSede.setIdSede(Integer.parseInt(vsede));
+			Fabrica fabrica = Fabrica.getFabrica(Fabrica.MYSQL);
+			SalaDAO dao = fabrica.getSalaDAO();
 		
-		Sala objSala = new Sala();
-		objSala.setNumero(vnumero);
-		objSala.setPiso(Integer.parseInt(vpiso));
-		objSala.setNumAlumnos(Integer.parseInt(vnumAlumnos));
-		objSala.setRecursos(vrecursos);
-		objSala.setFechaRegistro(new Date(System.currentTimeMillis()));
-		objSala.setEstado(1);
-		objSala.setSede(objSede);
+			int insertados = dao.insertaSala(objSala);
 		
-	Fabrica fabrica = Fabrica.getFabrica(Fabrica.MYSQL);
-	SalaDAO dao = fabrica.getSalaDAO();
-
-	int insertados = dao.insertaSala(objSala);
-
-	Respuesta objRespuesta = new Respuesta();
-	if (insertados > 0) {
-		objRespuesta.setMensaje("Registro exitoso");
-	}else {
-		objRespuesta.setMensaje("Error en el registro");
-	}
-	
-	Gson gson = new Gson();
-	String json = gson.toJson(objRespuesta);
-	
-	resp.setContentType("application/json;charset=UTF-8");
-	
-	PrintWriter out = resp.getWriter();
-	out.println(json);
-}
+			Respuesta objRespuesta = new Respuesta();
+			if (insertados > 0) {
+				objRespuesta.setMensaje("Registro exitoso");
+			}else {
+				objRespuesta.setMensaje("Error en el registro");
+			}
+			
+			Gson gson = new Gson();
+			String json = gson.toJson(objRespuesta);
+			
+			resp.setContentType("application/json;charset=UTF-8");
+			
+			PrintWriter out = resp.getWriter();
+			out.println(json);
+		}
 }
