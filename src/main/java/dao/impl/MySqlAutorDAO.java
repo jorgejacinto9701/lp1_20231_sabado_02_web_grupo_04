@@ -10,9 +10,11 @@ import java.util.logging.Logger;
 
 import dao.AutorDAO;
 import entity.Autor;
+import entity.Categoria;
 import entity.Grado;
 import util.FechaUtil;
 import util.MySqlDBConexion;
+
 
 public class MySqlAutorDAO implements AutorDAO {
 	
@@ -258,7 +260,61 @@ public class MySqlAutorDAO implements AutorDAO {
 		return objAutor;
 	}
 	
-	
+	@Override
+	public List<Autor> listaAutorComplejo(String nombres,String apellidos, int estado, int idGrado) {
+		List<Autor> lista = new ArrayList<Autor>();
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			conn = MySqlDBConexion.getConexion();
+			
+			String sql = "select a.*, g.descripcion from autor a inner join grado_autor g on a.idGrado = g.idGrado "
+					+ "where 1=1 "
+					+ "and a.nombres like ? "
+					+ "and a.apellidos like ? "
+					+ "and a.estado = ? "
+					+ "and (? = '-1' or a.idGrado = ?) ";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, nombres);
+			pstm.setString(2, apellidos);
+			pstm.setInt(3, estado);
+			pstm.setInt(4, idGrado);
+			pstm.setInt(5, idGrado);
+			
+			log.info(">>>> " + pstm);
+
+			rs = pstm.executeQuery();
+			Autor objAutor = null;
+			Grado objGrado = null;
+			while(rs.next()) {
+				objAutor = new Autor();
+				objAutor.setIdAutor(rs.getInt(1));
+				objAutor.setNombres(rs.getString(2));
+				objAutor.setApellidos(rs.getString(3));
+				objAutor.setFechaNacimiento(rs.getDate(4));
+				objAutor.setTelefono(rs.getString(5));
+				objAutor.setFechaRegistro(rs.getTimestamp(6));
+				objAutor.setEstado(rs.getInt(7));
+				
+				objGrado = new Grado();
+				objGrado.setIdGrado(rs.getInt(8));
+				objGrado.setDescripcion(rs.getString(9));
+				objAutor.setGrado(objGrado);
+				
+				lista.add(objAutor);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close();
+				if (conn != null) conn.close();
+			} catch (Exception e2) {}
+		}
+		
+		return lista;
+	}
 	
 	
 
