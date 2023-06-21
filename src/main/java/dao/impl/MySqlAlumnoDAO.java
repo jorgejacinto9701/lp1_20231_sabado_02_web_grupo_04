@@ -1,6 +1,7 @@
 package dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -213,6 +214,63 @@ public class MySqlAlumnoDAO implements AlumnoDAO{
 				} catch (Exception e2) {}
 			}
 			return objAlumno;
+		}
+
+		@Override
+		public List<Alumno> listaComplejo(String nombre, int idPais, int idEstado, Date fecInicio, Date fecFin) {
+			List<Alumno> lista = new ArrayList<Alumno>();
+			Connection conn = null;
+			PreparedStatement pstm = null;
+			ResultSet rs = null;
+			try {
+				conn = MySqlDBConexion.getConexion();
+				
+				String sql = "select a.*, p.nombre from alumno a "
+						+ "inner join pais p on a.idPais = p.idPais "
+						+ "where 1=1 and a.nombres like ? and (? = -1 or a.idPais = ?) and a.estado = ? and a.fechaNacimiento >= ? and a.fechaNacimiento <= ?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1, nombre);
+				pstm.setInt(2, idPais);
+				pstm.setInt(3, idPais);
+				pstm.setInt(4, idEstado);
+				pstm.setDate(5, fecInicio);
+				pstm.setDate(6, fecFin);
+
+				log.info(">>>> " + pstm);
+
+				rs = pstm.executeQuery();
+				Alumno objEmpleado = null;
+				Pais objPais = null;
+				while(rs.next()) {
+					objEmpleado = new Alumno();
+					objEmpleado.setIdAlumno(rs.getInt(1));
+					objEmpleado.setNombres(rs.getString(2));
+					objEmpleado.setApellidos(rs.getString(3));
+					objEmpleado.setTelefono(rs.getString(4));
+					objEmpleado.setDni(rs.getString(5));
+					objEmpleado.setCorreo(rs.getString(6));
+					objEmpleado.setFechaNacimiento(rs.getDate(7));
+					objEmpleado.setFechaRegistro(rs.getTimestamp(8));
+					objEmpleado.setEstado(rs.getInt(9));
+					objEmpleado.setFormateadoFecNac(FechaUtil.getFechaFormateadaYYYYMMdd(rs.getDate(7)));
+					
+					objPais = new Pais();
+					objPais.setIdPais(rs.getInt(10));
+					objPais.setNombre(rs.getString(11));
+					objEmpleado.setPais(objPais);
+					
+					lista.add(objEmpleado);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (pstm != null) pstm.close();
+					if (conn != null) conn.close();
+				} catch (Exception e2) {}
+			}
+			
+			return lista;
 		}
 
 
