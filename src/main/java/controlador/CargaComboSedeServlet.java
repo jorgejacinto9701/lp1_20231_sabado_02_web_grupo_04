@@ -16,7 +16,7 @@ import dao.SedeDAO;
 import entity.Sede;
 import fabricas.Fabrica;
 
-@WebServlet("/cargaSede")
+@WebServlet("/cargarSedes")
 public class CargaComboSedeServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;

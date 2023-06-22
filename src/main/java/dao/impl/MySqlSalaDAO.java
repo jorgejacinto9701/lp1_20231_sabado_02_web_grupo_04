@@ -1,6 +1,7 @@
 package dao.impl;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import entity.Sede;
 import util.MySqlDBConexion;
 
 public class MySqlSalaDAO implements SalaDAO {
-
-	private static Logger log = Logger.getLogger(MySqlSalaDAO.class.getName());
+	
+private static Logger log = Logger.getLogger(MySqlSalaDAO.class.getName());
 	
 	public int insertaSala(Sala  obj) {
 		int salida = -1;
@@ -63,7 +64,7 @@ public class MySqlSalaDAO implements SalaDAO {
 					+ "where sa.numero like ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, filtro);
-			
+
 			log.info(">>>> " + pstm);
 
 			rs = pstm.executeQuery();
@@ -168,10 +169,11 @@ public class MySqlSalaDAO implements SalaDAO {
 					+ "where sa.idSala like ?";
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, idSala);
-			
+
 			log.info(">>>> " + pstm);
 
 			rs = pstm.executeQuery();
+			
 			Sede objSede = null;
 			while(rs.next()) {
 				objSala = new Sala();
@@ -196,10 +198,68 @@ public class MySqlSalaDAO implements SalaDAO {
 				if (conn != null) conn.close();
 			} catch (Exception e2) {}
 		}
+		
 		return objSala;
 	}
 
+	@Override
+	public List<Sala> listaSalaComplejoServlet(String numero, int idSede, int estado, String recursos) {
+		List<Sala> lista = new ArrayList<Sala>();
+			Connection conn = null;
+			PreparedStatement pstm = null;
+			ResultSet rs = null;
+		try {
+			conn = MySqlDBConexion.getConexion();
+			
+		String sql = "SELECT sa.*, se.nombre FROM sala sa " +
+	                "INNER JOIN sede se ON sa.idSede = se.idSede " +
+	                "WHERE sa.numero LIKE ? " +
+	                "AND (? = -1 OR sa.idSede = ?) " +
+	                "AND sa.estado = ? " +
+	                "AND (? = '' OR sa.recursos = ?)";
+			pstm = conn.prepareStatement(sql);
+	        pstm.setString(1, numero);
+	        pstm.setInt(2, idSede);
+	        pstm.setInt(3, idSede);
+	        pstm.setInt(4, estado);
+	        pstm.setString(5, recursos);
+	        pstm.setString(6, recursos);
+			
+			log.info(">>>> " + pstm);
 
-	
+			rs = pstm.executeQuery();
+			Sala objSala = null;
+			Sede objSede = null;
+			while(rs.next()) {
+				objSala = new Sala();
+				objSala.setIdSala(rs.getInt(1));
+				objSala.setNumero(rs.getString(2));
+				objSala.setPiso(rs.getInt(3));
+				objSala.setNumAlumnos(rs.getInt(4));
+				objSala.setRecursos(rs.getString(5));
+				objSala.setFechaRegistro(rs.getTimestamp(6));
+				objSala.setEstado(rs.getInt(7));
+
+				objSede = new Sede();
+				objSede.setIdSede(rs.getInt(8));
+				objSede.setNombre(rs.getString(9));
+				objSala.setSede(objSede);
+				
+				lista.add(objSala);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close();
+				if (conn != null) conn.close();
+			} catch (Exception e2) {}
+		}
+		return lista;
+	}
+
+
 }
+
+
 
