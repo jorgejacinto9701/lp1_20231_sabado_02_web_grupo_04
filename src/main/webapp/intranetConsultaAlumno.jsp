@@ -38,7 +38,7 @@
 		
 		<div class="row" style="margin-top: 1%">
 		     <div class="col-md-4">
-		          <label class="control-label" for="id_pais">Pais</label>
+		          <label class="control-label" for="id_pais">País</label>
 		     </div>
 		     <div class="col-md-5">
 		          <select class="form-control" id="id_pais">
@@ -82,7 +82,7 @@
 						<th>Código</th>
 						<th>Nombres</th>
 						<th>Apellidos</th>
-						<th>Telefono</th>
+						<th>Teléfono</th>
 						<th>Dni</th>
 						<th>Correo</th>
 						<th>Fecha Nacimiento</th>
@@ -129,7 +129,7 @@
 		                                        </div>
 		                                    </div> 
 		                                    <div class="form-group" >
-		                                        <label class="col-lg-3 control-label" for="id_act_telefono">Telefono</label>
+		                                        <label class="col-lg-3 control-label" for="id_act_telefono">Teléfono</label>
 		                                        <div class="col-lg-8">
 													<input class="form-control" id="id_act_telefono" type="text" readonly="readonly"/>
 		                                        </div>
@@ -163,7 +163,7 @@
 		                                        </div>
 		                                    </div> 	 
 			                                <div class="form-group">
-		                                        <label class="col-lg-3 control-label" for="id_act_pais">Pais</label>
+		                                        <label class="col-lg-3 control-label" for="id_act_pais">País</label>
 		                                        <div class="col-lg-8">
 													<select class="form-control" id="id_act_pais" name="pais" disabled="disabled">
 														<option value=" ">[Seleccione]</option>

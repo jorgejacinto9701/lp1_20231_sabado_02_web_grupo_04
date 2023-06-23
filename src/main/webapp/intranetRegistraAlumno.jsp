@@ -35,8 +35,8 @@
 				<input class="form-control" type="text" id="id_apellido" name="apellido" placeholder="Ingrese el apellido">
 			</div>
 			<div class="form-group">
-				<label class="control-label" for="id_telefono">Telefono</label>
-				<input class="form-control" type="text" id="id_telefono" name="telefono" placeholder="Ingrese el telefono">
+				<label class="control-label" for="id_telefono">Teléfono</label>
+				<input class="form-control" type="text" id="id_telefono" name="telefono" placeholder="Ingrese el teléfono">
 			</div>
 			<div class="form-group">
 				<label class="control-label" for="id_dni">Dni</label>
