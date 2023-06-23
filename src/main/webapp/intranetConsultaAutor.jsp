@@ -22,7 +22,7 @@
 
 <jsp:include page="intranetCabecera.jsp" />
 	<div class="container" style="margin-top: 4%">
-		<h4>Consulta Autor</h4>
+		<h4>Raul Flores - Consultar Autor</h4>
 		
 	<div class="row" style="margin-top: 5%">
 				<div class="col-md-4">
@@ -74,6 +74,7 @@
 						<th>Fecha Registro</th>
 						<th>Estado</th>
 						<th>Grado</th>
+						<th> </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -87,7 +88,7 @@
 		<!-- INICIO MODAL DE ACTUALIZA -->
 		<div class="modal fade" id="id_div_modal_ver" >
 			<div class="modal-dialog" style="width: 60%">
-					<div class="modal-content">
+				<div class="modal-content">
 					<div class="modal-header" >
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4><span class="glyphicon glyphicon-ok-sign"></span>Datos de Autor</h4>
@@ -109,7 +110,7 @@
 											<div class="form-group" >
 		                                        <label class="col-lg-3 control-label" for="id_act_apellido">Apellido</label>
 		                                        <div class="col-lg-8">
-													<input class="form-control" id="id_act_nombre" type="text" readonly="readonly"/>
+													<input class="form-control" id="id_act_apellido" type="text" readonly="readonly"/>
 		                                        </div>
 		                                    </div>
 		                                    <div class="form-group">
@@ -117,6 +118,7 @@
 		                                    	<div class="col-lg-8">
 													<input class="form-control" id="id_act_fecNac" type="text" readonly="readonly"/>
 		                                        </div>
+		                                    </div>
 		                                    <div class="form-group">
 		                                        <label class="col-lg-3 control-label" for="id_act_telefono">Teléfono</label>
 		                                        <div class="col-lg-8">
@@ -205,7 +207,7 @@
 						{data: "idAutor",className:'text-center'},
 						{data: "nombres",className:'text-center'},
 						{data: "apellidos",className:'text-center'},						
-						{data: "fechaNacimiento",className:'text-center'},
+						{data: "formateadoFecNac",className:'text-center'},
 						{data: "telefono",className:'text-center'},
 						{data: "fechaRegistro",className:'text-center'},
 						{data: function(row, type, val, meta){
@@ -213,7 +215,7 @@
 						},className:'text-center'},
 						{data: "grado.descripcion",className:'text-center'},
 						{data: function(row, type, val, meta){
-							return '<button type="button" class="btn btn-info btn-sm" onClick="verFormulario(\'' + row.nombres + '\',\'' + row.apellidos + '\',\'' + row.fechaNacimiento + '\',\'' +  row.telefono + '\',\'' +  row.estado + '\',\'' +  row.grado.idGrado +'\');">Ver</button>';  
+							return '<button type="button" class="btn btn-info btn-sm" onClick="verFormulario(\'' + row.nombres + '\',\'' + row.apellidos + '\',\'' + row.formateadoFecNac + '\',\'' +  row.telefono + '\',\'' +  row.estado + '\',\'' +  row.grado.idGrado +'\');">Ver</button>';  
 						},className:'text-center'},
 					]                                     
 			    });

@@ -243,6 +243,7 @@ public class MySqlAutorDAO implements AutorDAO {
 				objAutor.setEstado(rs.getInt(7));
 				
 				
+				
 				objGrado = new Grado();
 				objGrado.setIdGrado(rs.getInt(8));
 				objGrado.setDescripcion(rs.getString(9));
@@ -296,6 +297,8 @@ public class MySqlAutorDAO implements AutorDAO {
 				objAutor.setTelefono(rs.getString(5));
 				objAutor.setFechaRegistro(rs.getTimestamp(6));
 				objAutor.setEstado(rs.getInt(7));
+				objAutor.setFormateadoFecNac(FechaUtil.getFechaFormateadaYYYYMMdd(rs.getDate(4)));
+				
 				
 				objGrado = new Grado();
 				objGrado.setIdGrado(rs.getInt(8));
