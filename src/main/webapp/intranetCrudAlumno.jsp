@@ -50,12 +50,12 @@
 						<th>Código</th>
 						<th>Nombres</th>
 						<th>Apellidos</th>
-						<th>Telefono</th>
+						<th>Teléfono</th>
 						<th>DNI</th>
 						<th>Correo</th>
 						<th>Fecha Nacimiento</th>
 						<th>Estado</th>
-						<th>Pais</th>
+						<th>País</th>
 						<th></th>
 						<th></th>
 						<th></th>
@@ -96,9 +96,9 @@
 		                                        </div>
 		                                    </div> 
 		                                    <div class="form-group" >
-		                                        <label class="col-lg-3 control-label" for="id_reg_telefono">Telefono</label>
+		                                        <label class="col-lg-3 control-label" for="id_reg_telefono">Teléfono</label>
 		                                        <div class="col-lg-8">
-													<input class="form-control" id="id_reg_telefono" name="telefono" placeholder="Ingrese el telefono" type="text" maxlength="9"/>
+													<input class="form-control" id="id_reg_telefono" name="telefono" placeholder="Ingrese el teléfono" type="text" maxlength="9"/>
 		                                        </div>
 		                                    </div> 
 											<div class="form-group">
@@ -120,7 +120,7 @@
 		                                        </div>
 		                                    </div> 	
 			                                <div class="form-group">
-		                                        <label class="col-lg-3 control-label" for="id_reg_pais">Pais</label>
+		                                        <label class="col-lg-3 control-label" for="id_reg_pais">País</label>
 		                                        <div class="col-lg-8">
 													<select class="form-control" id="id_reg_pais" name="pais">
 														<option value=" ">[Seleccione]</option>
@@ -172,9 +172,9 @@
 		                                        </div>
 		                                    </div>
 		                                    <div class="form-group" >
-		                                        <label class="col-lg-3 control-label" for="id_act_telefono">Telefono</label>
+		                                        <label class="col-lg-3 control-label" for="id_act_telefono">Teléfono</label>
 		                                        <div class="col-lg-8">
-													<input class="form-control" id="id_act_telefono" name="telefono" placeholder="Ingrese el Telefono" type="text" maxlength="9"/>
+													<input class="form-control" id="id_act_telefono" name="telefono" placeholder="Ingrese el Teléfono" type="text" maxlength="9"/>
 		                                        </div>
 		                                    </div>
 											<div class="form-group">
