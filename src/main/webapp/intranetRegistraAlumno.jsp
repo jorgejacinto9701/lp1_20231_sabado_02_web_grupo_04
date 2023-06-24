@@ -39,8 +39,8 @@
 				<input class="form-control" type="text" id="id_telefono" name="telefono" placeholder="Ingrese el teléfono">
 			</div>
 			<div class="form-group">
-				<label class="control-label" for="id_dni">Dni</label>
-				<input class="form-control" type="text" id="id_dni" name="dni" placeholder="Ingrese el dni" maxlength="8">
+				<label class="control-label" for="id_dni">DNI</label>
+				<input class="form-control" type="text" id="id_dni" name="dni" placeholder="Ingrese el DNI" maxlength="8">
 			</div>
 			<div class="form-group">
 				<label class="control-label" for="id_correo">Correo</label>
@@ -108,11 +108,11 @@ $(document).ready(function() {
         		selector: "#id_telefono",
         		validators : {
         			notEmpty: {
-                        message: 'El telefono es requerido'
+                        message: 'El teléfono es requerido'
                     },
                     regexp: {
                         regexp: /^[0-9]{9}$/,
-                        message: 'El telefono tiene 9 dígitos'
+                        message: 'El teléfono tiene 9 dígitos'
                     },
         		}
         	},

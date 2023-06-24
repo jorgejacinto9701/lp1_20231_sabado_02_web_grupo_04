@@ -422,11 +422,11 @@ function accionEliminacionFisica(array) {
 		        		selector: "#id_reg_telefono",
 		        		validators : {
 		        			notEmpty: {
-		                        message: 'El telefono es requerido'
+		                        message: 'El teléfono es requerido'
 		                    },
 		                    regexp: {
 		                        regexp: /^[0-9]{9}$/,
-		                        message: 'El telefono tiene 9 dígitos'
+		                        message: 'El teléfono tiene 9 dígitos'
 		                    },
 		        		}
 		        	},
@@ -513,11 +513,11 @@ function accionEliminacionFisica(array) {
 		        		selector: "#id_act_telefono",
 		        		validators : {
 		        			notEmpty: {
-		                        message: 'El telefono es requerido'
+		                        message: 'El teléfono es requerido'
 		                    },
 		                    regexp: {
 		                        regexp: /^[0-9]{9}$/,
-		                        message: 'El telefono tiene 9 dígitos'
+		                        message: 'El teléfono tiene 9 dígitos'
 		                    },
 		        		}
 		        	},
