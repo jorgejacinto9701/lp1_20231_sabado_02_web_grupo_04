@@ -290,7 +290,7 @@
 		        });
 		}
 		
-		function verFormularioActualiza(idAutor, nombre, fecnac, estado, pais){
+		function verFormularioActualiza(idAutor, nombre, apellido, fecNac, estado, grado){
 			console.log(">>> verFormularioActualiza");
 			$("#id_div_modal_actualiza").modal("show");
 			$("#idAutor").val(idAutor);
