@@ -476,13 +476,13 @@
 		        		selector: "#id_act_telefono",
 		        		validators : {
 		        			notEmpty: {
-		                        message: 'El telefono es requerido'
+		                        message: 'El teléfono es requerido'
 		                    },
 		                    
 		                    
 		                    regexp: {
 		                        regexp: /^\d{9}$/,
-		                        message: 'El telefono solo puede contener números y tener 9 dígitos'
+		                        message: 'El teléfono solo puede contener números y tener 9 dígitos'
 		                    },
 		                    
 		                    

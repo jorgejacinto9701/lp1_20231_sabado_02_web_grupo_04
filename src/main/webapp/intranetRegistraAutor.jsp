@@ -117,7 +117,7 @@
         		selector: "#id_telefono",
         		validators : {
         			notEmpty: {
-                        message: 'El telefono es requerido'
+                        message: 'El teléfono es requerido'
                     },
                     
                     
