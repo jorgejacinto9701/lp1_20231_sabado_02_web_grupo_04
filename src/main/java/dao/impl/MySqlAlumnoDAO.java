@@ -120,7 +120,7 @@ public class MySqlAlumnoDAO implements AlumnoDAO{
 				
 				String sql = "delete from alumno where idAlumno = ?";
 				//String sql = "call sp_alumno_elimina(?)"
-				pstm = conn.prepareCall(sql);
+				pstm = conn.prepareStatement(sql);
 				pstm.setInt(1, idAlumno);
 				
 				log.info(">>>> " + pstm);

@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="css/bootstrap.css" />
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
 <link rel="stylesheet" href="css/bootstrapValidator.css" />
+<link rel="stylesheet" href="css/styleAlumno.css" />
 
 <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
@@ -24,29 +25,28 @@
 
 <jsp:include page="intranetCabecera.jsp" />
 <div class="container" style="margin-top: 4%">
-<h4>Crud Alumno</h4>
 
-		<h1>CRUD Alumno</h1>
+		<h1 class="text-center">CRUD Alumno</h1>
 
-		<div class="row" style="margin-top: 5%">
-			<div class="col-md-3">
-				<label class="control-label" for="id_filtro">Nombres</label> 
+		<div class="row panel-busca">
+			<div class="col-md-3 text-custom">
+				<label class="control-label text" for="id_filtro">Nombres :</label> 
 			</div>	
 			<div class="col-md-6">
 				<input	class="form-control" type="text" id="id_filtro" placeholder="Ingrese el nombre">
 			</div>	
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary" id="id_btn_filtro">Filtro</button>
+				<button type="button" class="btn btn-comun" id="id_btn_filtro"><i class='bx bx-filter-alt mr-1'></i>Filtro</button>
 			</div>	
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary" data-toggle='modal' data-target="#id_div_modal_registra">Registra</button>
+				<button type="button" class="btn btn-comun" data-toggle='modal' data-target="#id_div_modal_registra"><i class='bx bx-archive-in'></i>Registra</button>
 			</div>
 		</div>
 		
 		
 		<div class="row" style="margin-top: 4%">
 			<table id="id_table" class="table table-bordered table-hover table-condensed" >
-				<thead style='background-color:#6c757d; color:white'>
+				<thead style='background-color:#F7F7F7; color:#88898E'>
 					<tr>
 						<th>Código</th>
 						<th>Nombres</th>
@@ -271,13 +271,13 @@ function agregarGrilla(lista){
 				},className:'text-center'},
 				{data: "pais.nombre",className:'text-center'},
 				{data:  function(row, type, val, meta){
-					return '<button type="button" class="btn btn-info btm-sm" onClick="verFormularioActualiza(\'' +  row.idAlumno + '\',\'' + row.nombres  + '\',\'' + row.apellidos  + '\',\'' + row.telefono  + '\',\'' + row.dni  + '\',\'' + row.correo  + '\',\'' + row.formateadoFecNac  + '\',\'' + row.estado +'\',\'' + row.pais.idPais + '\');" >Editar</button>';
+					return '<button type="button" class="btn btn-edit btm-sm" onClick="verFormularioActualiza(\'' +  row.idAlumno + '\',\'' + row.nombres  + '\',\'' + row.apellidos  + '\',\'' + row.telefono  + '\',\'' + row.dni  + '\',\'' + row.correo  + '\',\'' + row.formateadoFecNac  + '\',\'' + row.estado +'\',\'' + row.pais.idPais + '\');" ><i class="bx bx-edit-alt i-size"></i></button>';
 				},className:'text-center'},
 				{data:  function(row, type, val, meta){
-					return '<button type="button" class="btn btn-success btm-sm" onClick="eliminacionLogica(\'' + row.idAlumno +'\');">E.Logica</button>';
+					return '<button type="button" class="btn btn-log btm-sm" onClick="eliminacionLogica(\'' + row.idAlumno +'\');"><i class="bx bx-transfer i-size"></i></button>';
 				},className:'text-center'},
 				{data:  function(row, type, val, meta){
-					return '<button type="button" class="btn btn-danger btn-sm"  onClick="eliminacionFisica(\'' + row.idAlumno +'\');" >E.Física</button>';
+					return '<button type="button" class="btn btn-fis btn-sm"  onClick="eliminacionFisica(\'' + row.idAlumno +'\');" ><i class="bx bx-x-circle i-size"></i></button>';
 				},className:'text-center'},
 			]                                     
 	    });

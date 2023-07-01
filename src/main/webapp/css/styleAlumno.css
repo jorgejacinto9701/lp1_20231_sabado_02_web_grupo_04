@@ -1,0 +1,78 @@
+.btn-comun{
+	color: #F7F7F7;
+    font-weight: 600;
+    background-color: transparent;
+    border-color: #F7F7F7;
+}
+.btn-comun:hover {
+    color: #F7F7F7;
+}
+.btn-comun:focus {
+    color: #000;
+    background-color: #F7F7F7;
+    border-color: #F7F7F7;
+}
+.btn-edit{
+	color: #966DEA;
+    font-weight: 600;
+    background-color: transparent;
+    border-color: #966DEA;
+}
+.btn-edit:hover{
+	color: #966DEA;
+}
+.btn-edit:focus{
+	color: #966DEA;
+	outline: 5px auto #966DEA;
+}
+.btn-log{
+	color: #91BF76;
+    font-weight: 600;
+    background-color: transparent;
+    border-color: #91BF76;
+}
+.btn-log:hover{
+	color: #91BF76;
+}
+.btn-log:focus{
+	color: #91BF76;
+	outline: 5px auto #91BF76;
+}
+.btn-fis{
+	color: #FF999A;
+    font-weight: 600;
+    background-color: transparent;
+    border-color: #FF999A;
+}
+.btn-fis:hover{
+	color: #FF999A;
+}
+.btn-fis:focus{
+	color: #FF999A;
+	outline: 5px auto #FF999A;
+}
+i{
+	margin-right:.8rem;
+}
+.text{
+	color: #F7F7F7;
+    font-size: 18px;
+}
+.text-custom{
+	margin-top: 5PX;
+    display: grid;
+    place-content: center;
+    place-items: center;
+}
+.i-size{
+	font-size: 20px;
+    margin: auto;
+    align-items: center;
+    display: flex;
+}
+.panel-busca{
+	margin-top: 5%;
+    background-color: #402BCD;
+    padding: 30px;
+    border-radius: 0.8rem;
+}

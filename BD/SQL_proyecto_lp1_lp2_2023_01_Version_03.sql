@@ -1,6 +1,6 @@
---DROP DATABASE IF EXISTS prueba;
+-- DROP DATABASE IF EXISTS sistema_biblioteca_202301;
 
--- CREATE DATABASE prueba
+-- CREATE DATABASE sistema_biblioteca_202301
 --     WITH
 --     OWNER = postgres
 --     ENCODING = 'UTF8'
