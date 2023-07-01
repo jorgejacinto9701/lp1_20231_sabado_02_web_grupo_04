@@ -120,11 +120,11 @@ $(document).ready(function() {
         		selector: "#id_dni",
         		validators : {
         			notEmpty: {
-                        message: 'El dni es requerido'
+                        message: 'El DNI es requerido'
                     },
                     regexp: {
                         regexp: /^[0-9]{8}$/,
-                        message: 'El dni tiene 8 dígitos'
+                        message: 'El DNI tiene 8 dígitos'
                     },
         		}
         	},

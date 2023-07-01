@@ -83,7 +83,7 @@
 						<th>Nombres</th>
 						<th>Apellidos</th>
 						<th>Teléfono</th>
-						<th>Dni</th>
+						<th>DNI</th>
 						<th>Correo</th>
 						<th>Fecha Nacimiento</th>
 						<th>Fecha Registro</th>

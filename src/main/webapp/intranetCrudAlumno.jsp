@@ -9,6 +9,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/bootstrapValidator.js"></script>
 <script type="text/javascript" src="js/global.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 <link rel="stylesheet" href="css/bootstrap.css" />
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
 <link rel="stylesheet" href="css/bootstrapValidator.css" />
@@ -83,7 +84,7 @@
 			                   			<form id="id_form_registra">
 			                   			<input type="hidden" name="metodo" value="inserta">
 			                   			<div class="panel-body">
-			                                <div class="form-group" >
+			                                <div class="form-group m-4" >
 		                                        <label class="col-lg-3 control-label" for="id_reg_nombres">Nombres</label>
 		                                        <div class="col-lg-8">
 													<input class="form-control" id="id_reg_nombres" name="nombres" placeholder="Ingrese los Nombres" type="text" maxlength="100"/>
@@ -434,11 +435,11 @@ function accionEliminacionFisica(array) {
 		        		selector: "#id_reg_dni",
 		        		validators : {
 		        			notEmpty: {
-		                        message: 'El dni es requerido'
+		                        message: 'El DNI es requerido'
 		                    },
 		                    regexp: {
 		                        regexp: /^[0-9]{8}$/,
-		                        message: 'El dni tiene 8 dígitos'
+		                        message: 'El DNI tiene 8 dígitos'
 		                    },
 		        		}
 		        	},
@@ -525,11 +526,11 @@ function accionEliminacionFisica(array) {
 		        		selector: "#id_act_dni",
 		        		validators : {
 		        			notEmpty: {
-		                        message: 'El dni es requerido'
+		                        message: 'El DNI es requerido'
 		                    },
 		                    regexp: {
 		                        regexp: /^[0-9]{8}$/,
-		                        message: 'El dni tiene 8 dígitos'
+		                        message: 'El DNI tiene 8 dígitos'
 		                    },
 		        		}
 		        	},

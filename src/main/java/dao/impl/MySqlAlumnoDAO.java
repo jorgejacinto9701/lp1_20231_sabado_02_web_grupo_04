@@ -26,7 +26,10 @@ public class MySqlAlumnoDAO implements AlumnoDAO{
 			try {
 				conn = MySqlDBConexion.getConexion();
 				
-				String sql = "insert into sistema_biblioteca_202301.alumno values(null,?,?,?,?,?,?,?,?,?)";
+				String sql = "INSERT INTO public.alumno( "
+						+ "	idalumno, nombres, apellidos, telefono, dni, correo, fechanacimiento, fecharegistro, estado, idpais) "
+						+ "	VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				//String sql = "call sp_alumno_inserta(?,?,?,?,?,?,?,?,?);"
 				pstm = conn.prepareStatement(sql);
 				pstm.setString(1, obj.getNombres());
 				pstm.setString(2, obj.getApellidos());
@@ -62,9 +65,10 @@ public class MySqlAlumnoDAO implements AlumnoDAO{
 			try {
 				conn = MySqlDBConexion.getConexion();
 				
-				String sql = "select a.*, p.nombre from alumno a inner join pais p on "
-						+ " p.idPais = a.idPais "
-						+ " where a.nombres like ? ";
+				String sql = "select a.*, p.nombre from alumno a  "
+						+ "inner join pais p on p.idPais = a.idPais  "
+						+ "where a.nombres like ?";
+				//String sql = "call sp_alumno_lista(?)"
 				pstm = conn.prepareStatement(sql);
 				pstm.setString(1, filtro);
 				
@@ -115,7 +119,8 @@ public class MySqlAlumnoDAO implements AlumnoDAO{
 				conn = MySqlDBConexion.getConexion();
 				
 				String sql = "delete from alumno where idAlumno = ?";
-				pstm = conn.prepareStatement(sql);
+				//String sql = "call sp_alumno_elimina(?)"
+				pstm = conn.prepareCall(sql);
 				pstm.setInt(1, idAlumno);
 				
 				log.info(">>>> " + pstm);
@@ -142,7 +147,8 @@ public class MySqlAlumnoDAO implements AlumnoDAO{
 			try {
 				conn = MySqlDBConexion.getConexion();
 				
-				String sql = "update alumno set nombres=?, apellidos=?, telefono=?, dni=?, correo=?, fechaNacimiento=?, estado=?, idPais=? where idAlumno = ?";
+				String sql = "update alumno set nombres=?,apellidos=?,telefono=?,dni=?,correo=?,fechaNacimiento=?,estado=?,idPais=? where idAlumno = ?";
+				//String sql = "call sp_alumno_actualiza(?,?,?,?,?,?,?,?,?)"
 				pstm = conn.prepareStatement(sql);
 				pstm.setString(1, obj.getNombres());
 				pstm.setString(2, obj.getApellidos());
@@ -178,9 +184,10 @@ public class MySqlAlumnoDAO implements AlumnoDAO{
 			try {
 				conn = MySqlDBConexion.getConexion();
 				
-				String sql = "select a.*, p.nombre from alumno a inner join pais p on "
-						+ " a.idPais = p.idPais "
-						+ " where a.idAlumno like ? ";
+				String sql = "select a.*, p.nombre from alumno a  "
+						+ "inner join pais p on a.idPais = p.idPais  "
+						+ "where a.idAlumno = ?";
+				//String sql = "call sp_alumno_busca(?)"
 				pstm = conn.prepareStatement(sql);
 				pstm.setInt(1, idAlumno);
 				
@@ -225,9 +232,13 @@ public class MySqlAlumnoDAO implements AlumnoDAO{
 			try {
 				conn = MySqlDBConexion.getConexion();
 				
-				String sql = "select a.*, p.nombre from alumno a "
+				String sql = "select a.*, p.nombre from alumno a  "
 						+ "inner join pais p on a.idPais = p.idPais "
-						+ "where 1=1 and a.nombres like ? and (? = -1 or a.idPais = ?) and a.estado = ? and a.fechaNacimiento >= ? and a.fechaNacimiento <= ?";
+						+ "where 1=1 and a.nombres like ?  "
+						+ "and (? = -1 or a.idPais = ?) "
+						+ "and a.estado = ?  "
+						+ "and a.fechaNacimiento >= ? and a.fechaNacimiento <= ?;";
+				//String sql = "call sp_alumno_lista_complejo(?,?,?,?,?)";
 				pstm = conn.prepareStatement(sql);
 				pstm.setString(1, nombre);
 				pstm.setInt(2, idPais);
